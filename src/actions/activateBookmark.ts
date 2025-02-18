@@ -47,17 +47,24 @@ export class ActivateBookmark extends SingletonAction<ActivateBookmarkSettings> 
   onSendToPlugin(
     ev: SendToPluginEvent<JsonValue, ActivateBookmarkSettings>
   ): Promise<void> | void {
-    const message = ev.payload as SendToPluginMessage;
+    try {
+      const message = ev.payload as SendToPluginMessage;
 
-    if (!ev.action.isKey()) {
-      return;
-    }
+      logger.debug("Received message from property inspector", message);
 
-    if (isGetBookmarks(message)) {
-      radarManagerInstance.getBookmarks();
-    } else if (isRefreshBookmarks(message)) {
-      logger.info("Refreshing bookmarks");
-      radarManagerInstance.getBookmarks(true);
+      if (!ev.action.isKey()) {
+        return;
+      }
+
+      if (isGetBookmarks(message)) {
+        logger.debug("Getting bookmarks");
+        radarManagerInstance.getBookmarks(message.isRefresh);
+      } else if (isRefreshBookmarks(message)) {
+        logger.debug("Refreshing bookmarks");
+        radarManagerInstance.getBookmarks(true);
+      }
+    } catch (error: unknown) {
+      logger.error("Error handling sendToPlugin event", error);
     }
   }
 }

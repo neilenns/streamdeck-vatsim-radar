@@ -28,7 +28,7 @@ class RadarManager extends EventEmitter {
    */
   public getBookmarks(forceRefresh = false) {
     if (forceRefresh || this.bookmarks.length === 0) {
-      logger.info("Force refreshing bookmarks");
+      logger.debug("Force refreshing bookmarks");
       this.bookmarks = [
         { id: randomInt(100).toString(), name: "Bookmark 1" },
         { id: randomInt(100).toString(), name: "Bookmark 2" },
