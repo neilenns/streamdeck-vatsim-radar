@@ -1,10 +1,15 @@
 import { JsonValue } from "@elgato/streamdeck";
+import {
+  GetBookmarksEvent,
+  OpenApiTokenWebsiteEvent,
+  RefreshBookmarksEvent,
+} from "./events";
 
 /**
  * Message sent to the plugin to get the bookmarks.
  */
 export interface GetBookmarksRequest {
-  event: "getBookmarks";
+  event: GetBookmarksEvent;
   isRefresh: undefined | true;
   [key: string]: JsonValue;
 }
@@ -13,7 +18,7 @@ export interface GetBookmarksRequest {
  * Message sent to the plugin to refresh the bookmarks.
  */
 export interface RefreshBookmarksRequest {
-  event: "refreshBookmarks";
+  event: RefreshBookmarksEvent;
   [key: string]: JsonValue;
 }
 
@@ -21,7 +26,7 @@ export interface RefreshBookmarksRequest {
  * Message sent to the plugin to open the API token website.
  */
 export interface OpenApiTokenWebsite {
-  event: "openApiTokenWebsite";
+  event: OpenApiTokenWebsiteEvent;
   [key: string]: JsonValue;
 }
 

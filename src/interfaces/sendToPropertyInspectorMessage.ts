@@ -1,10 +1,11 @@
 import { JsonValue } from "@elgato/streamdeck";
+import { GetBookmarksEvent } from "./events";
 
 /**
  * The response to a GetBookmarks request.
  */
 export interface GetBookmarksResult {
-  event: "getBookmarks";
+  event: GetBookmarksEvent;
   items: DataSourceResult;
   [key: string]: JsonValue;
 }

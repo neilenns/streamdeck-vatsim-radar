@@ -39,7 +39,8 @@ class RadarManager extends EventEmitter {
   }
 
   /**
-   * Retrieves the bookmarks from the VATSIM RADAR websocket connection.
+   * Retrieves the bookmarks from the VATSIM RADAR websocket connection. If the API token is
+   * not set, an error message will be sent to the property inspector and the bookmarks will be set to an empty array.
    * @param forceRefresh - Whether to force refresh the bookmarks. Defaults to false.
    */
   public getBookmarks(forceRefresh = false) {
