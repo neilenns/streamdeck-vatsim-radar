@@ -28,21 +28,23 @@ class RadarManager extends EventEmitter {
    */
   public getBookmarks(forceRefresh = false) {
     if (forceRefresh || this.bookmarks.length === 0) {
-      logger.debug("Force refreshing bookmarks");
+      logger.debug("Refreshing bookmarks");
       this.bookmarks = [
         { id: randomInt(100).toString(), name: "Bookmark 1" },
         { id: randomInt(100).toString(), name: "Bookmark 2" },
         { id: randomInt(100).toString(), name: "Bookmark 3" },
       ];
-
-      this.emit("bookmarksUpdated", this.bookmarks);
-
-      return;
-    } else {
-      this.emit("bookmarksUpdated", this.bookmarks);
-
-      return;
     }
+
+    this.emit("bookmarksUpdated", this.bookmarks);
+  }
+
+  /**
+   * Activates a bookmark by sending the appropriate message to VATSIM Radar.
+   * @param id - The ID of the bookmark to activate.
+   */
+  public activateBookmark(id: string) {
+    logger.debug(`Activating bookmark ${id}`);
   }
 }
 

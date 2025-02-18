@@ -37,7 +37,19 @@ export class ActivateBookmark extends SingletonAction<ActivateBookmarkSettings> 
    * @param ev The event.
    */
   async onKeyDown(ev: KeyDownEvent<ActivateBookmarkSettings>): Promise<void> {
-    await ev.action.setTitle("Hello");
+    try {
+      const bookmark = ev.payload.settings.bookmark;
+
+      if (!bookmark) {
+        await ev.action.showAlert();
+        return;
+      }
+
+      radarManagerInstance.activateBookmark(bookmark);
+      await ev.action.showOk();
+    } catch (error: unknown) {
+      logger.error("Error activating bookmark", error);
+    }
   }
 
   /**
@@ -73,6 +85,6 @@ export class ActivateBookmark extends SingletonAction<ActivateBookmarkSettings> 
  * Settings for {@link ActivateBookmark}.
  */
 interface ActivateBookmarkSettings {
-  bookmark: string;
+  bookmark: string | undefined;
   [key: string]: JsonValue;
 }
