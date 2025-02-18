@@ -1,6 +1,7 @@
 import { Bookmark } from "@interfaces/bookmark";
 import streamDeck from "@elgato/streamdeck";
 import { handleAsyncException } from "@root/utils/handleAsyncException";
+import { DataSourceResult } from "@interfaces/sendToPropertyInspectorMessage";
 
 /**
  * Sends bookmark data to the active property inspector.
@@ -13,7 +14,7 @@ export const handleBookmarksUpdated = (data: Bookmark[]) => {
       items: data.map((bookmark) => ({
         label: `Bookmark ${bookmark.id}`,
         value: bookmark.id,
-      })),
+      })) as DataSourceResult,
     })
     .catch((err: unknown) => {
       handleAsyncException(

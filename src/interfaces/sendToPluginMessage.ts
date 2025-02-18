@@ -3,7 +3,7 @@ import { JsonValue } from "@elgato/streamdeck";
 /**
  * Message sent to the plugin to get the bookmarks.
  */
-export interface GetBookmarks {
+export interface GetBookmarksRequest {
   event: "getBookmarks";
   isRefresh: undefined | true;
   [key: string]: JsonValue;
@@ -12,7 +12,7 @@ export interface GetBookmarks {
 /**
  * Message sent to the plugin to refresh the bookmarks.
  */
-export interface RefreshBookmarks {
+export interface RefreshBookmarksRequest {
   event: "refreshBookmarks";
   [key: string]: JsonValue;
 }
@@ -27,13 +27,13 @@ export interface OpenApiTokenWebsite {
 
 /**
  * Union of all messages sent to the plugin.
- * @see {@link GetBookmarks} for the message to get the bookmarks.
- * @see {@link RefreshBookmarks} for the message to refresh the bookmarks.
+ * @see {@link GetBookmarksRequest} for the message to get the bookmarks.
+ * @see {@link RefreshBookmarksRequest} for the message to refresh the bookmarks.
  * @see {@link OpenApiTokenWebsite} for the message to open the API token website.
  **/
 export type SendToPluginMessage =
-  | GetBookmarks
-  | RefreshBookmarks
+  | GetBookmarksRequest
+  | RefreshBookmarksRequest
   | OpenApiTokenWebsite;
 
 /**
@@ -43,7 +43,7 @@ export type SendToPluginMessage =
  */
 export function isGetBookmarks(
   message: SendToPluginMessage
-): message is GetBookmarks {
+): message is GetBookmarksRequest {
   return message.event === "getBookmarks";
 }
 
@@ -54,7 +54,7 @@ export function isGetBookmarks(
  */
 export function isRefreshBookmarks(
   message: SendToPluginMessage
-): message is RefreshBookmarks {
+): message is RefreshBookmarksRequest {
   return message.event === "refreshBookmarks";
 }
 
