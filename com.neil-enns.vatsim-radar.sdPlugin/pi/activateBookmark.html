@@ -22,5 +22,25 @@
         >Refresh</sdpi-button
       >
     </sdpi-item>
+
+    <sdpi-item label="VATSIM Radar API token">
+      <sdpi-password
+        setting="apiToken"
+        placeholder="Enter your VATSIM Radar API token"
+        global="true"
+        required
+      />
+    </sdpi-item>
+    <sdpi-item>
+      <div>
+        To obtain an API token visit
+        <span
+          style="color: lightblue; cursor: pointer"
+          onClick="SDPIComponents.streamDeckClient.send('sendToPlugin', {event: 'openApiTokenWebsite'});"
+          aria-label="Open the VATSIM Radar API Token website"
+          >VATSIM Radar</span
+        >.
+      </div>
+    </sdpi-item>
   </body>
 </html>

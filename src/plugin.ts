@@ -5,6 +5,7 @@ import { ActivateBookmark } from "@actions/activateBookmark";
 import radarManagerInstance from "@managers/radar";
 import { handleBookmarksUpdated } from "./events/radar/bookmarksUpdated";
 import { handleAsyncException } from "./utils/handleAsyncException";
+import { handleDidReceiveGlobalSettings } from "./events/streamdeck/handleReceiveGlobalSettings";
 
 const logger = mainLogger.child({ service: "plugin" });
 
@@ -18,6 +19,7 @@ streamDeck.actions.registerAction(new ActivateBookmark());
 
 // Register event handlers
 radarManagerInstance.on("bookmarksUpdated", handleBookmarksUpdated);
+streamDeck.settings.onDidReceiveGlobalSettings(handleDidReceiveGlobalSettings);
 
 // Finally, connect to the Stream Deck.
 streamDeck
