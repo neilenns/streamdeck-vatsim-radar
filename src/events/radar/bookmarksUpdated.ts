@@ -1,8 +1,7 @@
 import { Bookmark } from "@interfaces/bookmark";
 import streamDeck from "@elgato/streamdeck";
 import { handleAsyncException } from "@root/utils/handleAsyncException";
-import { Item } from "@interfaces/sendToPropertyInspectorMessage";
-import { GetBookmarksEvent } from "@interfaces/events";
+import { EventName, Item } from "@interfaces/streamDeckMessages";
 
 /**
  * Sends bookmark data to the active property inspector.
@@ -11,7 +10,7 @@ import { GetBookmarksEvent } from "@interfaces/events";
 export const handleBookmarksUpdated = (data: Bookmark[]) => {
   streamDeck.ui.current
     ?.sendToPropertyInspector({
-      event: "getBookmarks" as GetBookmarksEvent,
+      event: EventName.GetBookmarks,
       items: data.map(
         (bookmark): Item => ({
           label: `Bookmark ${bookmark.id}`,

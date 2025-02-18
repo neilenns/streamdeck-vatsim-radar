@@ -1,15 +1,16 @@
 import { JsonValue } from "@elgato/streamdeck";
-import {
-  GetBookmarksEvent,
-  OpenApiTokenWebsiteEvent,
-  RefreshBookmarksEvent,
-} from "./events";
+
+export enum EventName {
+  GetBookmarks = "getBookmarks",
+  RefreshBookmarks = "refreshBookmarks",
+  OpenApiTokenWebsite = "openApiTokenWebsite",
+}
 
 /**
  * Message sent to the plugin to get the bookmarks.
  */
 export interface GetBookmarksRequest {
-  event: GetBookmarksEvent;
+  event: EventName.GetBookmarks;
   isRefresh: undefined | true;
   [key: string]: JsonValue;
 }
@@ -18,7 +19,7 @@ export interface GetBookmarksRequest {
  * Message sent to the plugin to refresh the bookmarks.
  */
 export interface RefreshBookmarksRequest {
-  event: RefreshBookmarksEvent;
+  event: EventName.RefreshBookmarks;
   [key: string]: JsonValue;
 }
 
@@ -26,7 +27,48 @@ export interface RefreshBookmarksRequest {
  * Message sent to the plugin to open the API token website.
  */
 export interface OpenApiTokenWebsite {
-  event: OpenApiTokenWebsiteEvent;
+  event: EventName.OpenApiTokenWebsite;
+  [key: string]: JsonValue;
+}
+
+/**
+ * The response to a GetBookmarks request.
+ */
+export interface GetBookmarksResult {
+  event: EventName.GetBookmarks;
+  items: DataSourceResult;
+  [key: string]: JsonValue;
+}
+
+/**
+ * The result of a DataSource request.
+ * @see https://sdpi-components.dev/docs/helpers/data-source
+ */
+export type DataSourceResult = DataSourceResultItem[];
+
+/**
+ * An item in a DataSource result. This can be either an item or a group of items.
+ * This is used to populate the dropdown menu in the property inspector.
+ * @see https://sdpi-components.dev/docs/helpers/data-source
+ **/
+export type DataSourceResultItem = Item | ItemGroup;
+
+/**
+ * An item in an SDPI data source.
+ */
+export interface Item {
+  disabled?: boolean;
+  label?: string;
+  value: string;
+  [key: string]: JsonValue;
+}
+
+/**
+ * A group of items in an SDPI data source.
+ */
+export interface ItemGroup {
+  label?: string;
+  children: Item[];
   [key: string]: JsonValue;
 }
 
@@ -49,7 +91,7 @@ export type SendToPluginMessage =
 export function isGetBookmarks(
   message: SendToPluginMessage
 ): message is GetBookmarksRequest {
-  return message.event === "getBookmarks";
+  return message.event === EventName.GetBookmarks;
 }
 
 /**
@@ -60,7 +102,7 @@ export function isGetBookmarks(
 export function isRefreshBookmarks(
   message: SendToPluginMessage
 ): message is RefreshBookmarksRequest {
-  return message.event === "refreshBookmarks";
+  return message.event === EventName.RefreshBookmarks;
 }
 
 /**
@@ -71,5 +113,5 @@ export function isRefreshBookmarks(
 export function isOpenApiTokenWebsite(
   message: SendToPluginMessage
 ): message is OpenApiTokenWebsite {
-  return message.event === "openApiTokenWebsite";
+  return message.event === EventName.OpenApiTokenWebsite;
 }

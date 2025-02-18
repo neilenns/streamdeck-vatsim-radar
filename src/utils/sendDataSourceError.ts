@@ -1,6 +1,6 @@
-import { GetBookmarksResult } from "@interfaces/sendToPropertyInspectorMessage";
 import streamDeck from "@elgato/streamdeck";
 import { handleAsyncException } from "./handleAsyncException";
+import { EventName, GetBookmarksResult } from "@interfaces/streamDeckMessages";
 
 export const sendDataSourceError = (message: string) => {
   streamDeck.ui.current
@@ -14,7 +14,7 @@ export const sendDataSourceError = (message: string) => {
 };
 
 const createErrorMessage = (message: string): GetBookmarksResult => ({
-  event: "getBookmarks",
+  event: EventName.GetBookmarks,
   items: [
     {
       label: message,
