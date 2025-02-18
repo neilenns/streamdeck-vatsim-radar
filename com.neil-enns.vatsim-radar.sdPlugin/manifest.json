@@ -13,7 +13,8 @@
       "States": [
         {
           "Image": "images/actions/default",
-          "TitleAlignment": "middle"
+          "TitleAlignment": "middle",
+          "Title": "Bookmark"
         }
       ]
     }

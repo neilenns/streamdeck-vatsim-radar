@@ -4,7 +4,6 @@ import {
   KeyDownEvent,
   SendToPluginEvent,
   SingletonAction,
-  WillAppearEvent,
 } from "@elgato/streamdeck";
 import {
   isGetBookmarks,
@@ -22,22 +21,23 @@ const logger = mainLogger.child({ service: "activateBookmarkAction" });
 @action({ UUID: "com.neil-enns.vatsim-radar.activate-bookmark" })
 export class ActivateBookmark extends SingletonAction<ActivateBookmarkSettings> {
   /**
-   * Processes the onWillAppear event.
-   * @param ev The event.
-   * @returns Nothing.
-   */
-  onWillAppear(
-    ev: WillAppearEvent<ActivateBookmarkSettings>
-  ): void | Promise<void> {
-    return ev.action.setTitle("Bookmark");
-  }
-
-  /**
    * Activates the bookmark associated with the action by sending a request to VATSIM Radar.
    * @param ev The event.
    */
   async onKeyDown(ev: KeyDownEvent<ActivateBookmarkSettings>): Promise<void> {
-    await ev.action.setTitle("Hello");
+    try {
+      const bookmark = ev.payload.settings.bookmark;
+
+      if (!bookmark) {
+        await ev.action.showAlert();
+        return;
+      }
+
+      radarManagerInstance.activateBookmark(bookmark);
+      await ev.action.showOk();
+    } catch (error: unknown) {
+      logger.error("Error activating bookmark", error);
+    }
   }
 
   /**
@@ -73,6 +73,6 @@ export class ActivateBookmark extends SingletonAction<ActivateBookmarkSettings> 
  * Settings for {@link ActivateBookmark}.
  */
 interface ActivateBookmarkSettings {
-  bookmark: string;
+  bookmark: string | undefined;
   [key: string]: JsonValue;
 }
