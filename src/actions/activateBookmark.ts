@@ -1,4 +1,4 @@
-import {
+import streamDeck, {
   action,
   DidReceiveSettingsEvent,
   JsonValue,
@@ -8,6 +8,7 @@ import {
 } from "@elgato/streamdeck";
 import {
   isGetBookmarks,
+  isOpenApiTokenWebsite,
   isRefreshBookmarks,
   SendToPluginMessage,
 } from "@interfaces/sendToPluginMessage";
@@ -51,9 +52,9 @@ export class ActivateBookmark extends SingletonAction<ActivateBookmarkSettings> 
    * Handles requests from the property inspector.
    * @param ev The event.
    */
-  onSendToPlugin(
+  async onSendToPlugin(
     ev: SendToPluginEvent<JsonValue, ActivateBookmarkSettings>
-  ): Promise<void> | void {
+  ): Promise<void> {
     try {
       const message = ev.payload as SendToPluginMessage;
 
@@ -63,7 +64,9 @@ export class ActivateBookmark extends SingletonAction<ActivateBookmarkSettings> 
         return;
       }
 
-      if (isGetBookmarks(message)) {
+      if (isOpenApiTokenWebsite(message)) {
+        await streamDeck.system.openUrl("https://vatsim-radar.com/");
+      } else if (isGetBookmarks(message)) {
         radarManagerInstance.getBookmarks(message.isRefresh);
       } else if (isRefreshBookmarks(message)) {
         radarManagerInstance.getBookmarks(true);
