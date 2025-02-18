@@ -1,46 +1,45 @@
 {
-	"Name": "VATSIM Radar",
-	"Version": "0.1.0.0",
-	"Author": "Neil Enns",
-	"Actions": [
-		{
-			"Name": "Activate bookmark",
-			"UUID": "com.neil-enns.vatsim-radar.activate-bookmark",
-			"Icon": "images/actions/activateBookmark/bookmark-regular",
-			"Tooltip": "Activates a VATSIM Radar bookmark.",
-			"Controllers": [
-				"Keypad"
-			],
-			"States": [
-				{
-					"Image": "images/actions/default",
-					"TitleAlignment": "middle"
-				}
-			]
-		}
-	],
-	"Category": "VATSIM Radar",
-	"CategoryIcon": "images/plugin/logo",
-	"CodePath": "bin/plugin.js",
-	"Description": "Actions for interacting with VATSIM Radar",
-	"Icon": "images/plugin/logo",
-	"SDKVersion": 2,
-	"Software": {
-		"MinimumVersion": "6.5"
-	},
-	"OS": [
-		{
-			"Platform": "mac",
-			"MinimumVersion": "10.15"
-		},
-		{
-			"Platform": "windows",
-			"MinimumVersion": "10"
-		}
-	],
-	"Nodejs": {
-		"Version": "20",
-		"Debug": "--inspect=127.0.0.1:54546"
-	},
-	"UUID": "com.neil-enns.vatsim-radar"
+  "Name": "VATSIM Radar",
+  "Version": "0.1.0.0",
+  "Author": "Neil Enns",
+  "Actions": [
+    {
+      "Name": "Activate bookmark",
+      "UUID": "com.neil-enns.vatsim-radar.activate-bookmark",
+      "Icon": "images/actions/activateBookmark/bookmark-regular",
+      "Tooltip": "Activates a VATSIM Radar bookmark.",
+      "PropertyInspectorPath": "pi/activateBookmark.html",
+      "Controllers": ["Keypad"],
+      "States": [
+        {
+          "Image": "images/actions/default",
+          "TitleAlignment": "middle"
+        }
+      ]
+    }
+  ],
+  "Category": "VATSIM Radar",
+  "CategoryIcon": "images/plugin/logo",
+  "CodePath": "bin/plugin.js",
+  "Description": "Actions for interacting with VATSIM Radar",
+  "Icon": "images/plugin/logo",
+  "SDKVersion": 2,
+  "Software": {
+    "MinimumVersion": "6.5"
+  },
+  "OS": [
+    {
+      "Platform": "mac",
+      "MinimumVersion": "10.15"
+    },
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "Nodejs": {
+    "Version": "20",
+    "Debug": "--inspect=127.0.0.1:54546"
+  },
+  "UUID": "com.neil-enns.vatsim-radar"
 }

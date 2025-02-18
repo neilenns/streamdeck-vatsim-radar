@@ -11,5 +11,12 @@
     "node_modules": true
   },
   "eslint.useFlatConfig": true,
-  "cSpell.words": ["elgato", "Logform", "streamdeck", "vatsim"]
+  "cSpell.words": [
+    "elgato",
+    "Logform",
+    "sdpi",
+    "streamdeck",
+    "Typeguard",
+    "vatsim"
+  ]
 }
