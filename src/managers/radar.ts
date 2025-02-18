@@ -2,6 +2,7 @@ import { Bookmark } from "@interfaces/bookmark";
 import { randomInt } from "crypto";
 import mainLogger from "@utils/logger";
 import EventEmitter from "events";
+import { sendDataSourceError } from "@root/utils/sendDataSourceError";
 
 const logger = mainLogger.child({ module: "RadarManager" });
 
@@ -38,17 +39,21 @@ class RadarManager extends EventEmitter {
   }
 
   /**
-   * Retrieves the bookmarks from the VATSIM RADAR websocket connection.
+   * Retrieves the bookmarks from the VATSIM RADAR websocket connection. If the API token is
+   * not set, an error message will be sent to the property inspector and the bookmarks will be set to an empty array.
    * @param forceRefresh - Whether to force refresh the bookmarks. Defaults to false.
    */
   public getBookmarks(forceRefresh = false) {
-    // When the API token isn't set, force the bookmark list to an empty array.
+    // When the API token isn't set, force the bookmark list to an empty array and send an error message.
     if (!this.apiToken) {
       logger.error("API token is not set");
+      sendDataSourceError("API token is not set");
       this.bookmarks = [];
+      return;
     }
+
     // Actually refresh the list if forced or there are no bookmarks to begin with.
-    else if (forceRefresh || this.bookmarks.length === 0) {
+    if (forceRefresh || this.bookmarks.length === 0) {
       logger.debug("Refreshing bookmarks");
 
       this.bookmarks = Array.from({ length: 3 }, () => {

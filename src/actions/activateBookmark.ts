@@ -11,7 +11,7 @@ import {
   isOpenApiTokenWebsite,
   isRefreshBookmarks,
   SendToPluginMessage,
-} from "@interfaces/sendToPluginMessage";
+} from "@interfaces/streamDeckMessages";
 import radarManagerInstance from "@managers/radar";
 import mainLogger from "@utils/logger";
 
