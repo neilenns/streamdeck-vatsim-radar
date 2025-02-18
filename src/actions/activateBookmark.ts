@@ -1,5 +1,6 @@
 import {
   action,
+  DidReceiveSettingsEvent,
   JsonValue,
   KeyDownEvent,
   SendToPluginEvent,
@@ -40,6 +41,12 @@ export class ActivateBookmark extends SingletonAction<ActivateBookmarkSettings> 
     }
   }
 
+  onDidReceiveSettings(
+    ev: DidReceiveSettingsEvent<ActivateBookmarkSettings>
+  ): Promise<void> | void {
+    logger.debug("Received settings", ev.payload.settings);
+  }
+
   /**
    * Handles requests from the property inspector.
    * @param ev The event.
@@ -57,10 +64,8 @@ export class ActivateBookmark extends SingletonAction<ActivateBookmarkSettings> 
       }
 
       if (isGetBookmarks(message)) {
-        logger.debug("Getting bookmarks");
         radarManagerInstance.getBookmarks(message.isRefresh);
       } else if (isRefreshBookmarks(message)) {
-        logger.debug("Refreshing bookmarks");
         radarManagerInstance.getBookmarks(true);
       }
     } catch (error: unknown) {
