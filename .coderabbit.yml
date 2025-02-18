@@ -1,0 +1,7 @@
+language: "en-US"
+reviews:
+  collapse_walkthrough: true
+  sequence_diagrams: true
+  auto_review:
+    enabled: false
+    drafts: false
