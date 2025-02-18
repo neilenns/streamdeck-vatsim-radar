@@ -11,7 +11,7 @@ export enum EventName {
  */
 export interface GetBookmarksRequest {
   event: EventName.GetBookmarks;
-  isRefresh: undefined | true;
+  isRefresh: boolean;
   [key: string]: JsonValue;
 }
 
