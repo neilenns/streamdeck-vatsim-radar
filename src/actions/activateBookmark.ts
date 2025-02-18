@@ -8,8 +8,10 @@ import {
 } from "@elgato/streamdeck";
 import {
   isGetBookmarks,
+  isRefreshBookmarks,
   SendToPluginMessage,
 } from "@interfaces/sendToPluginMessage";
+import radarManagerInstance from "@managers/radar";
 import mainLogger from "@utils/logger";
 
 const logger = mainLogger.child({ service: "activateBookmarkAction" });
@@ -47,8 +49,15 @@ export class ActivateBookmark extends SingletonAction<ActivateBookmarkSettings> 
   ): Promise<void> | void {
     const message = ev.payload as SendToPluginMessage;
 
+    if (!ev.action.isKey()) {
+      return;
+    }
+
     if (isGetBookmarks(message)) {
-      logger.info("Received getBookmarks event");
+      radarManagerInstance.getBookmarks();
+    } else if (isRefreshBookmarks(message)) {
+      logger.info("Refreshing bookmarks");
+      radarManagerInstance.getBookmarks(true);
     }
   }
 }

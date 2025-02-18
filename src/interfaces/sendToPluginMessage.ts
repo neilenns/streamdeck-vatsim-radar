@@ -9,11 +9,17 @@ export interface GetBookmarks {
   [key: string]: JsonValue;
 }
 
+export interface RefreshBookmarks {
+  event: "refreshBookmarks";
+  [key: string]: JsonValue;
+}
+
 /**
  * Union of all messages sent to the plugin.
  * @see {@link GetBookmarks} for the message to get the bookmarks.
+ * @see {@link RefreshBookmarks} for the message to refresh the bookmarks.
  **/
-export type SendToPluginMessage = GetBookmarks;
+export type SendToPluginMessage = GetBookmarks | RefreshBookmarks;
 
 /**
  * Typeguard for GetBookmarks.
@@ -23,9 +29,16 @@ export type SendToPluginMessage = GetBookmarks;
 export function isGetBookmarks(
   message: SendToPluginMessage
 ): message is GetBookmarks {
-  // Disabled since at the moment this is technically an unnecessary test since SendToPluginMessage can only
-  // ever be one type. However, this is a good example of how to use a typeguard. This will be useful if
-  // more types are added to SendToPluginMessage in the future.
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   return message.event === "getBookmarks";
+}
+
+/**
+ * Typeguard for RefreshBookmarks.
+ * @param message The message.
+ * @returns True if the message is a RefreshBookmarks message.
+ */
+export function isRefreshBookmarks(
+  message: SendToPluginMessage
+): message is RefreshBookmarks {
+  return message.event === "refreshBookmarks";
 }

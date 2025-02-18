@@ -5,10 +5,11 @@
     "module": "ES2022",
     "moduleResolution": "Bundler",
     "paths": {
+      "@managers/*": ["./src/managers/*"],
       "@actions/*": ["./src/actions/*"],
-      "@utils/*": ["./src/utils/*"],
       "@interfaces/*": ["./src/interfaces/*"],
-      "@root/*": ["./src/*"]
+      "@root/*": ["./src/*"],
+      "@utils/*": ["./src/utils/*"]
     }
   },
   "include": ["src/**/*.ts"],
