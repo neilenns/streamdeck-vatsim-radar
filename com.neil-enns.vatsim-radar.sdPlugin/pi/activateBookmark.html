@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://sdpi-components.dev/releases/v3/sdpi-components.js"></script>
+  </head>
+  <body>
+    <sdpi-item label="Bookmark">
+      <sdpi-select
+        setting="bookmark"
+        datasource="getBookmarks"
+        loading="Loading bookmarks..."
+        hot-reload
+      >
+      </sdpi-select>
+    </sdpi-item>
+
+    <sdpi-item>
+      <sdpi-button
+        onClick="SDPIComponents.streamDeckClient.send('sendToPlugin', {event: 'refreshBookmarks'});"
+        >Refresh</sdpi-button
+      >
+    </sdpi-item>
+  </body>
+</html>

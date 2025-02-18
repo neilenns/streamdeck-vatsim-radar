@@ -2,6 +2,9 @@ import streamDeck from "@elgato/streamdeck";
 import mainLogger from "@utils/logger";
 
 import { ActivateBookmark } from "@actions/activateBookmark";
+import radarManagerInstance from "@managers/radar";
+import { handleBookmarksUpdated } from "./events/radar/bookmarksUpdated";
+import { handleAsyncException } from "./utils/handleAsyncException";
 
 const logger = mainLogger.child({ service: "plugin" });
 
@@ -13,6 +16,9 @@ process.on("uncaughtException", (error) => {
 // Register the actions.
 streamDeck.actions.registerAction(new ActivateBookmark());
 
+// Register event handlers
+radarManagerInstance.on("bookmarksUpdated", handleBookmarksUpdated);
+
 // Finally, connect to the Stream Deck.
 streamDeck
   .connect()
@@ -20,5 +26,5 @@ streamDeck
     logger.info("Plugin started");
   })
   .catch((err: unknown) => {
-    logger.error("Error connecting to streamdeck:", err);
+    handleAsyncException("Error connecting to Stream Deck", err);
   });
