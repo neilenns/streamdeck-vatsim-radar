@@ -4,24 +4,24 @@
   "Author": "Neil Enns",
   "Actions": [
     {
-      "Name": "Counter",
-      "UUID": "com.neil-enns.vatsim-radar.increment",
-      "Icon": "images/actions/counter/icon",
-      "Tooltip": "Displays a count, which increments by one on press.",
+      "Name": "Activate bookmark",
+      "UUID": "com.neil-enns.vatsim-radar.activate-bookmark",
+      "Icon": "images/actions/activateBookmark/bookmark-regular",
+      "Tooltip": "Activates a VATSIM Radar bookmark.",
       "Controllers": ["Keypad"],
       "States": [
         {
-          "Image": "images/actions/counter/key",
+          "Image": "images/actions/default",
           "TitleAlignment": "middle"
         }
       ]
     }
   ],
   "Category": "VATSIM Radar",
-  "CategoryIcon": "images/plugin/category-icon",
+  "CategoryIcon": "images/plugin/logo",
   "CodePath": "bin/plugin.js",
   "Description": "Actions for interacting with VATSIM Radar",
-  "Icon": "images/plugin/marketplace",
+  "Icon": "images/plugin/logo",
   "SDKVersion": 2,
   "Software": {
     "MinimumVersion": "6.5"
