@@ -9,4 +9,6 @@ streamDeck.logger.setLevel(LogLevel.TRACE);
 streamDeck.actions.registerAction(new IncrementCounter());
 
 // Finally, connect to the Stream Deck.
-streamDeck.connect();
+streamDeck.connect().catch((err: unknown) => {
+  console.log(err);
+});
