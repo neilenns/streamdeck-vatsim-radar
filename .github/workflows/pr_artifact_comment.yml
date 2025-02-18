@@ -15,5 +15,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           prefix: "Build for this pull request:"
-          format: "[StreamDeck-vATIS.zip]({url})"
+          format: "[StreamDeck-vatsim-radar.zip]({url})"
           addTo: pull
