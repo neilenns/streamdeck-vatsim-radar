@@ -19,11 +19,6 @@ streamDeck.actions.registerAction(new ActivateBookmark());
 // Register event handlers
 radarManagerInstance.on("bookmarksUpdated", handleBookmarksUpdated);
 
-// Clean up event listeners when the plugin is stopped
-streamDeck.on("willDisappear", () => {
-  radarManagerInstance.off("bookmarksUpdated", handleBookmarksUpdated);
-});
-
 // Finally, connect to the Stream Deck.
 streamDeck
   .connect()
