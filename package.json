@@ -1,0 +1,33 @@
+{
+  "scripts": {
+    "build": "rollup -c",
+    "watch": "cross-env NODE_ENV=development rollup -c -w --watch.onEnd=\"streamdeck restart com.neil-enns.vatsim-radar\"",
+    "lint": "npm run eslint && npm run markdownlint",
+    "pack": "streamdeck pack com.neil-enns.vatsim-radar.sdPlugin -f -o .",
+    "link": "streamdeck link com.neil-enns.vatsim-radar.sdPlugin",
+    "eslint": "eslint src --report-unused-disable-directives --max-warnings 0",
+    "markdownlint": " markdownlint **/*.md -i node_modules/"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@elgato/cli": "^0.3.0",
+    "@rollup/plugin-commonjs": "^25.0.5",
+    "@rollup/plugin-node-resolve": "^15.2.2",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@tsconfig/node20": "^20.1.2",
+    "@types/node": "20.8.10",
+    "cross-env": "^7.0.3",
+    "eslint": "^9.20.1",
+    "eslint-config-prettier": "^10.0.1",
+    "markdownlint": "^0.37.4",
+    "markdownlint-cli": "^0.44.0",
+    "rollup": "^4.0.2",
+    "tslib": "^2.6.2",
+    "typescript": "^5.2.2",
+    "typescript-eslint": "^8.24.1"
+  },
+  "dependencies": {
+    "@elgato/streamdeck": "^0.3.0"
+  }
+}
