@@ -29,11 +29,11 @@ class RadarManager extends EventEmitter {
   public getBookmarks(forceRefresh = false) {
     if (forceRefresh || this.bookmarks.length === 0) {
       logger.debug("Refreshing bookmarks");
-      this.bookmarks = [
-        { id: randomInt(100).toString(), name: "Bookmark 1" },
-        { id: randomInt(100).toString(), name: "Bookmark 2" },
-        { id: randomInt(100).toString(), name: "Bookmark 3" },
-      ];
+
+      this.bookmarks = Array.from({ length: 3 }, () => {
+        const id = randomInt(1, 100).toString();
+        return { id, name: `Bookmark ${id}` };
+      });
     }
 
     this.emit("bookmarksUpdated", this.bookmarks);
