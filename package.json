@@ -16,7 +16,7 @@
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.5",
     "@tsconfig/node20": "^20.1.2",
-    "@types/node": "20.8.10",
+    "@types/node": "20.17.19",
     "cross-env": "^7.0.3",
     "eslint": "^9.20.1",
     "eslint-config-prettier": "^10.0.1",
