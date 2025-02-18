@@ -46,6 +46,15 @@ class RadarManager extends EventEmitter {
   public activateBookmark(id: string) {
     logger.debug(`Activating bookmark ${id}`);
   }
+
+  /**
+   * Gets a bookmark by its ID.
+   * @param id - The ID of the bookmark to get.
+   * @returns The bookmark, or undefined if it doesn't exist.
+   */
+  public getBookmarkById(id: string): Bookmark | undefined {
+    return this.bookmarks.find((bookmark) => bookmark.id === id);
+  }
 }
 
 const radarManagerInstance = RadarManager.getInstance();
