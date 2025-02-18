@@ -22,19 +22,24 @@ class Logger {
    * environment variables at build time.
    */
   private constructor() {
-    this.winston = winston.createLogger({
-      level: this.level(),
-      transports: [
-        new winston.transports.Console({ forceConsole: true }),
-        new StreamdeckTransport({
-          scope: "vatsimRadar",
-          format: winston.format.printf((info) => {
-            const customInfo = info as vatsimRadarLogInfo;
-            return `[${customInfo.service}] ${customInfo.message}`;
+    try {
+      this.winston = winston.createLogger({
+        level: this.level(),
+        transports: [
+          new winston.transports.Console({ forceConsole: true }),
+          new StreamdeckTransport({
+            scope: "vatsimRadar",
+            format: winston.format.printf((info) => {
+              const customInfo = info as vatsimRadarLogInfo;
+              return `[${customInfo.service}] ${customInfo.message}`;
+            }),
           }),
-        }),
-      ],
-    });
+        ],
+      });
+    } catch (error: unknown) {
+      console.error("Failed to initialize logger:", error);
+      throw error;
+    }
   }
 
   /**
