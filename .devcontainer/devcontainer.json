@@ -10,5 +10,5 @@
       "theme": "agnoster"
     }
   },
-  "postCreateCommand": "post-create.sh"
+  "postCreateCommand": ".devcontainer/post-create.sh"
 }
