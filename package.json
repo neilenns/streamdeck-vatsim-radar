@@ -19,7 +19,7 @@
     "@rollup/plugin-typescript": "^12.0.0",
     "@tsconfig/node20": "^20.1.2",
     "@types/node": "22.13.11",
-    "cross-env": "^7.0.3",
+    "cross-env": "^10.0.0",
     "eslint": "^9.20.1",
     "eslint-config-prettier": "^10.0.1",
     "markdownlint": "^0.37.4",
