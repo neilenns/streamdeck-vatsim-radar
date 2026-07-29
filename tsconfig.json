@@ -3,6 +3,7 @@
   "compilerOptions": {
     "paths": {
       "@actions/*": ["./src/actions/*"],
+      "@events/*": ["./src/events/*"],
       "@interfaces/*": ["./src/interfaces/*"],
       "@managers/*": ["./src/managers/*"],
       "@root/*": ["./src/*"]

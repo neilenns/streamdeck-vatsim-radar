@@ -6,8 +6,9 @@ class RadarManager extends EventEmitter {
   private static instance: RadarManager | null = null;
   private socket: WebSocket | null = null;
   private reconnectInterval = 1000 * 5; // 5 seconds
-  private url = "ws://127.0.0.1:49082/";
+  private url = "ws://127.0.0.1:48073/";
   private reconnectTimer: NodeJS.Timeout | null = null;
+  private _isAppRunning = false;
 
   private constructor() {
     super();
@@ -20,6 +21,22 @@ class RadarManager extends EventEmitter {
   public static getInstance(): RadarManager {
     RadarManager.instance ??= new RadarManager();
     return RadarManager.instance;
+  }
+
+  /**
+   * Gets whether the VATSIM Radar application was detected as running by Stream Deck.
+   * @returns {boolean} True if running.
+   */
+  public get isAppRunning(): boolean {
+    return this._isAppRunning;
+  }
+
+  /**
+   * Sets whether the VATSIM Radar application is running.
+   * @param {boolean} newValue True if running.
+   */
+  public set isAppRunning(newValue: boolean) {
+    this._isAppRunning = newValue;
   }
 
   /**
