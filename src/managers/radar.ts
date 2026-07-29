@@ -1,6 +1,11 @@
-import { OutgoingMessage } from "@root/interfaces/messages";
+import {
+  IncomingMessage,
+  isBookmarksMessage,
+  OutgoingMessage,
+} from "@root/interfaces/messages";
 import EventEmitter from "events";
 import WebSocket from "ws";
+import streamDeck from "@elgato/streamdeck";
 
 class RadarManager extends EventEmitter {
   private static instance: RadarManager | null = null;
@@ -60,7 +65,7 @@ class RadarManager extends EventEmitter {
    */
   public connect(): void {
     if (this.socket && this.socket.readyState !== WebSocket.CLOSED) {
-      console.warn("WebSocket is already connected or connecting.");
+      streamDeck.logger.warn("WebSocket is already connected or connecting.");
       return;
     }
 
@@ -73,12 +78,12 @@ class RadarManager extends EventEmitter {
     this.socket = new WebSocket(this.url);
 
     this.socket.on("open", () => {
-      console.debug("WebSocket connection established.");
+      streamDeck.logger.debug("WebSocket connection established.");
       this.emit("connected");
     });
 
     this.socket.on("close", () => {
-      console.debug("WebSocket connection closed");
+      streamDeck.logger.debug("WebSocket connection closed");
 
       this.emit("disconnected");
       this.reconnect();
@@ -86,11 +91,11 @@ class RadarManager extends EventEmitter {
 
     this.socket.on("error", (err: Error & { code: string }) => {
       if (err.code === "ECONNREFUSED") {
-        console.debug(
+        streamDeck.logger.debug(
           "Unable to connect to VATSIM Radar, connection refused. VATSIM Radar probably isn't running.",
         );
       } else {
-        console.error("WebSocket error:", err.message);
+        streamDeck.logger.error("WebSocket error:", err.message);
       }
 
       this.reconnect();
@@ -121,8 +126,14 @@ class RadarManager extends EventEmitter {
    * fires the appropriate event.
    * @param message The message to process
    */
-  private processMessage(message: string): void {
-    console.debug(`Received: ${message}`);
+  private processMessage(data: string): void {
+    const message = JSON.parse(data.toString()) as IncomingMessage;
+
+    if (isBookmarksMessage(message)) {
+      this.emit("bookmarks", message.bookmarks);
+    }
+
+    streamDeck.logger.debug(`Received: ${message}`);
   }
 
   /**
@@ -136,7 +147,7 @@ class RadarManager extends EventEmitter {
     }
 
     this.reconnectTimer = setTimeout(() => {
-      console.debug(`Attempting to reconnect...`);
+      streamDeck.logger.debug(`Attempting to reconnect...`);
       this.connect();
     }, this.reconnectInterval);
   }
