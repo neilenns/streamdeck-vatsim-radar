@@ -4,29 +4,15 @@
   "Author": "Neil Enns",
   "Actions": [
     {
-      "Name": "Counter",
-      "UUID": "com.neil-enns.vatsim-radar.increment",
-      "Icon": "imgs/actions/counter/icon",
-      "Tooltip": "Displays a count, which increments by one on press.",
-      "PropertyInspectorPath": "ui/increment-counter.html",
-      "Controllers": ["Keypad"],
-      "States": [
-        {
-          "Image": "imgs/actions/counter/key",
-          "TitleAlignment": "middle"
-        }
-      ]
-    },
-    {
       "Name": "Activate bookmark",
       "UUID": "com.neil-enns.vatsim-radar.activate-bookmark",
-      "Icon": "imgs/actions/counter/icon",
+      "Icon": "images/actions/activate-bookmark/icon",
       "Tooltip": "Activates a VATSIM Radar bookmark.",
       "PropertyInspectorPath": "ui/activate-bookmark.html",
       "Controllers": ["Keypad"],
       "States": [
         {
-          "Image": "imgs/actions/counter/key",
+          "Image": "images/actions/activate-bookmark/default",
           "TitleAlignment": "middle"
         }
       ]
@@ -36,10 +22,10 @@
     "windows": ["vatsim-radar.exe"]
   },
   "Category": "VATSIM Radar",
-  "CategoryIcon": "imgs/plugin/category-icon",
+  "CategoryIcon": "images/plugin/category-icon",
   "CodePath": "bin/plugin.js",
   "Description": "Stream Deck actions for VATSIM Radar",
-  "Icon": "imgs/plugin/marketplace",
+  "Icon": "images/plugin/marketplace",
   "SDKVersion": 3,
   "Software": {
     "MinimumVersion": "7.1"
