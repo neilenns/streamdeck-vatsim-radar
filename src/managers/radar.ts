@@ -133,7 +133,7 @@ class RadarManager extends EventEmitter {
       this.emit("received-bookmarks", message.data.bookmarks);
     }
 
-    streamDeck.logger.debug(`Received: ${message}`);
+    streamDeck.logger.debug(`Received: ${JSON.stringify(message)}`);
   }
 
   /**

@@ -2,7 +2,17 @@ export interface GetBookmarksMessage {
   type: "get-bookmarks";
 }
 
-export type Bookmark = string;
+export interface ActivateBookmarkMessage {
+  type: "activate-bookmark";
+  data: {
+    id: number;
+  };
+}
+export type Bookmark = {
+  label: string;
+  value: number;
+  order: number;
+};
 
 export interface BookmarksMessage {
   type: "bookmarks";
@@ -11,7 +21,7 @@ export interface BookmarksMessage {
   };
 }
 
-export type OutgoingMessage = GetBookmarksMessage;
+export type OutgoingMessage = GetBookmarksMessage | ActivateBookmarkMessage;
 export type IncomingMessage = BookmarksMessage;
 
 export function isBookmarksMessage(
