@@ -1,9 +1,11 @@
-import {
+import streamDeck, {
   action,
   KeyDownEvent,
+  SendToPluginEvent,
   SingletonAction,
   WillAppearEvent,
 } from "@elgato/streamdeck";
+import { JsonValue } from "@elgato/utils";
 import { Bookmark } from "@interfaces/messages";
 import radarManager from "@managers/radar";
 
@@ -12,9 +14,21 @@ export class ActivateBookmark extends SingletonAction<ActivateBookmarkSettings> 
   override onWillAppear(
     ev: WillAppearEvent<ActivateBookmarkSettings>,
   ): void | Promise<void> {
-    return ev.action.setTitle(
-      `${ev.payload.settings.selectedBookmark ?? "None"}`,
-    );
+    return ev.action.setTitle(`${ev.payload.settings.bookmark ?? "None"}`);
+  }
+
+  override onSendToPlugin(
+    ev: SendToPluginEvent<JsonValue, ActivateBookmarkSettings>,
+  ): void {
+    if (
+      ev.payload instanceof Object &&
+      "event" in ev.payload &&
+      ev.payload.event === "get-bookmarks"
+    ) {
+      radarManager.sendMessage({
+        type: "get-bookmarks",
+      });
+    }
   }
 
   override async onKeyDown(
@@ -22,15 +36,12 @@ export class ActivateBookmark extends SingletonAction<ActivateBookmarkSettings> 
   ): Promise<void> {
     const { settings } = ev.payload;
 
-    if (!settings.selectedBookmark) {
-      radarManager.sendMessage({
-        type: "get-bookmarks",
-      });
-      return;
-    }
+    streamDeck.logger.info(
+      `Activating bookmark: ${settings.bookmark ?? "None"}`,
+    );
   }
 }
 
 type ActivateBookmarkSettings = {
-  selectedBookmark?: Bookmark;
+  bookmark?: Bookmark;
 };
