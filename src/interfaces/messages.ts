@@ -6,7 +6,9 @@ export type Bookmark = string;
 
 export interface BookmarksMessage {
   type: "bookmarks";
-  bookmarks: Bookmark[];
+  data: {
+    bookmarks: Bookmark[];
+  };
 }
 
 export type OutgoingMessage = GetBookmarksMessage;

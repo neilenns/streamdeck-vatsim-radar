@@ -21,9 +21,9 @@ streamDeck.system.onApplicationDidLaunch(handleOnApplicationDidLaunch);
 streamDeck.system.onApplicationDidTerminate(handleOnApplicationDidTerminate);
 streamDeck.system.onSystemDidWakeUp(handleOnSystemDidWakeUp);
 
-radarManager.on("received-bookmarks", (bookmarks: Bookmark[]) =>
-  handleReceivedBookmarks(bookmarks),
-);
+radarManager.on("received-bookmarks", (bookmarks: Bookmark[]) => {
+  handleReceivedBookmarks(bookmarks);
+});
 
 // Finally, connect to the Stream Deck.
 streamDeck.connect();
