@@ -130,7 +130,7 @@ class RadarManager extends EventEmitter {
     const message = JSON.parse(data.toString()) as IncomingMessage;
 
     if (isBookmarksMessage(message)) {
-      this.emit("bookmarks", message.bookmarks);
+      this.emit("received-bookmarks", message.data.bookmarks);
     }
 
     streamDeck.logger.debug(`Received: ${message}`);

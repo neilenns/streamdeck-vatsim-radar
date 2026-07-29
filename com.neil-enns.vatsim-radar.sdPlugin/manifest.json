@@ -22,7 +22,7 @@
       "UUID": "com.neil-enns.vatsim-radar.activate-bookmark",
       "Icon": "imgs/actions/counter/icon",
       "Tooltip": "Activates a VATSIM Radar bookmark.",
-      "PropertyInspectorPath": "ui/increment-counter.html",
+      "PropertyInspectorPath": "ui/activate-bookmark.html",
       "Controllers": ["Keypad"],
       "States": [
         {
