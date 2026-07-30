@@ -10,7 +10,7 @@ export interface ActivateBookmarkMessage {
 }
 export type Bookmark = {
   label: string;
-  value: number;
+  id: number;
   order: number;
 };
 

@@ -8,7 +8,7 @@ export function handleReceivedBookmarks(bookmarks?: Bookmark[]): void {
     .sort((a, b) => a.order - b.order)
     .map((bookmark) => ({
       label: bookmark.label,
-      value: bookmark.value,
+      value: bookmark.id,
     }));
 
   streamDeck.ui.sendToPropertyInspector({
