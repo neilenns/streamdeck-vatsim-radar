@@ -1,6 +1,7 @@
 import {
   IncomingMessage,
   isBookmarksMessage,
+  isDashboardsMessage,
   OutgoingMessage,
 } from "@root/interfaces/messages";
 import EventEmitter from "events";
@@ -131,9 +132,11 @@ class RadarManager extends EventEmitter {
 
     if (isBookmarksMessage(message)) {
       this.emit("received-bookmarks", message.data.bookmarks);
+    } else if (isDashboardsMessage(message)) {
+      this.emit("received-dashboards", message.data.dashboards);
     }
 
-    streamDeck.logger.debug(`Received: ${message}`);
+    streamDeck.logger.debug(`Received: ${JSON.stringify(message)}`);
   }
 
   /**

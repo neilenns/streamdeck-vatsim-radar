@@ -6,10 +6,13 @@ import { handleOnApplicationDidLaunch } from "@events/streamdeck/applicationDidL
 import { handleOnApplicationDidTerminate } from "@events/streamdeck/applicationDidTerminate";
 import { handleOnSystemDidWakeUp } from "@events/streamdeck/systemDidWakeUp";
 import { handleReceivedBookmarks } from "@events/radar/receivedBookmarks";
-import { Bookmark } from "@interfaces/messages";
+import { Bookmark, Dashboard } from "@interfaces/messages";
+import { handleReceivedDashboards } from "@events/radar/receivedDashboards";
+import { ActivateDashboard } from "@actions/activate-dashboard";
 
 // Register actions
 streamDeck.actions.registerAction(new ActivateBookmark());
+streamDeck.actions.registerAction(new ActivateDashboard());
 
 // Register event handlers
 streamDeck.system.onApplicationDidLaunch(handleOnApplicationDidLaunch);
@@ -18,6 +21,10 @@ streamDeck.system.onSystemDidWakeUp(handleOnSystemDidWakeUp);
 
 radarManager.on("received-bookmarks", (bookmarks: Bookmark[]) => {
   handleReceivedBookmarks(bookmarks);
+});
+
+radarManager.on("received-dashboards", (dashboards: Dashboard[]) => {
+  handleReceivedDashboards(dashboards);
 });
 
 // Finally, connect to the Stream Deck.
