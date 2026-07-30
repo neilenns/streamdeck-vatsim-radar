@@ -16,6 +16,20 @@
           "TitleAlignment": "middle"
         }
       ]
+    },
+    {
+      "Name": "Activate dashboard",
+      "UUID": "com.neil-enns.vatsim-radar.activate-dashboard",
+      "Icon": "images/actions/activate-dashboard/icon",
+      "Tooltip": "Activates a VATSIM Radar dashboard.",
+      "PropertyInspectorPath": "ui/activate-dashboard.html",
+      "Controllers": ["Keypad"],
+      "States": [
+        {
+          "Image": "images/actions/activate-dashboard/default",
+          "TitleAlignment": "middle"
+        }
+      ]
     }
   ],
   "ApplicationsToMonitor": {

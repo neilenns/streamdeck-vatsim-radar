@@ -59,5 +59,5 @@ export class ActivateBookmark extends SingletonAction<ActivateBookmarkSettings> 
 }
 
 type ActivateBookmarkSettings = {
-  bookmark?: number;
+  bookmark?: string;
 };
