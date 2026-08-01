@@ -6,7 +6,8 @@
       "@events/*": ["./src/events/*"],
       "@interfaces/*": ["./src/interfaces/*"],
       "@managers/*": ["./src/managers/*"],
-      "@root/*": ["./src/*"]
+      "@root/*": ["./src/*"],
+      "@utils/*": ["./utils/*"]
     },
     "customConditions": ["node"],
     "module": "ES2022",

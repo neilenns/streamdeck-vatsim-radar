@@ -9,7 +9,9 @@
     "@elgato/cli": "^1.7.4",
     "@eslint/js": "^10.0.1",
     "@rollup/plugin-commonjs": "^29.0.2",
+    "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.2",
+    "@rollup/plugin-replace": "^6.0.3",
     "@rollup/plugin-terser": "^1.0.0",
     "@rollup/plugin-typescript": "^12.1.0",
     "@tsconfig/node20": "^20.1.2",
@@ -22,6 +24,9 @@
     "typescript-eslint": "^8.65.0"
   },
   "dependencies": {
-    "@elgato/streamdeck": "^2.0.0"
+    "@elgato/streamdeck": "^2.0.0",
+    "dotenv": "^17.4.2",
+    "streamdeck-transport": "^2.0.1",
+    "winston": "^3.19.0"
   }
 }

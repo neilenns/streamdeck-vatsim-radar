@@ -6,7 +6,9 @@ import {
 } from "@root/interfaces/messages";
 import EventEmitter from "events";
 import WebSocket from "ws";
-import streamDeck from "@elgato/streamdeck";
+import mainLogger from "@utils/logger";
+
+const logger = mainLogger.child({ service: "radar" });
 
 class RadarManager extends EventEmitter {
   private static instance: RadarManager | null = null;
@@ -66,7 +68,7 @@ class RadarManager extends EventEmitter {
    */
   public connect(): void {
     if (this.socket && this.socket.readyState !== WebSocket.CLOSED) {
-      streamDeck.logger.warn("WebSocket is already connected or connecting.");
+      logger.warn("WebSocket is already connected or connecting.");
       return;
     }
 
@@ -79,12 +81,12 @@ class RadarManager extends EventEmitter {
     this.socket = new WebSocket(this.url);
 
     this.socket.on("open", () => {
-      streamDeck.logger.debug("WebSocket connection established.");
+      logger.debug("WebSocket connection established.");
       this.emit("connected");
     });
 
     this.socket.on("close", () => {
-      streamDeck.logger.debug("WebSocket connection closed");
+      logger.debug("WebSocket connection closed");
 
       this.emit("disconnected");
       this.reconnect();
@@ -92,11 +94,11 @@ class RadarManager extends EventEmitter {
 
     this.socket.on("error", (err: Error & { code: string }) => {
       if (err.code === "ECONNREFUSED") {
-        streamDeck.logger.debug(
+        logger.debug(
           "Unable to connect to VATSIM Radar, connection refused. VATSIM Radar probably isn't running.",
         );
       } else {
-        streamDeck.logger.error("WebSocket error:", err.message);
+        logger.error("WebSocket error:", err.message);
       }
 
       this.reconnect();
@@ -136,7 +138,7 @@ class RadarManager extends EventEmitter {
       this.emit("received-dashboards", message.data.dashboards);
     }
 
-    streamDeck.logger.debug(`Received: ${JSON.stringify(message)}`);
+    logger.debug(`Received: ${JSON.stringify(message)}`);
   }
 
   /**
@@ -150,7 +152,7 @@ class RadarManager extends EventEmitter {
     }
 
     this.reconnectTimer = setTimeout(() => {
-      streamDeck.logger.debug(`Attempting to reconnect...`);
+      logger.debug(`Attempting to reconnect...`);
       this.connect();
     }, this.reconnectInterval);
   }
