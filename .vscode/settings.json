@@ -10,7 +10,7 @@
       "url": "https://schemas.elgato.com/streamdeck/plugins/layout.json"
     }
   ],
-  "cSpell.words": ["elgato", "imgs", "sdpi", "streamdeck"],
+  "cSpell.words": ["elgato", "imgs", "Logform", "sdpi", "streamdeck"],
   "files.exclude": {
     "**/bin/": true,
     "**/logs/": true

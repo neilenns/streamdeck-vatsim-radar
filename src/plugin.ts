@@ -1,3 +1,4 @@
+import "dotenv/config";
 import streamDeck from "@elgato/streamdeck";
 
 import radarManager from "@managers/radar";

@@ -1,8 +1,9 @@
-import streamDeck, { ApplicationDidLaunchEvent } from "@elgato/streamdeck";
+import { ApplicationDidLaunchEvent } from "@elgato/streamdeck";
 import radarManager from "@managers/radar";
 
-export const handleOnApplicationDidLaunch = (ev: ApplicationDidLaunchEvent) => {
-  streamDeck.logger.info("Received applicationDidLaunch event", ev.application);
+export const handleOnApplicationDidLaunch = (
+  _ev: ApplicationDidLaunchEvent,
+) => {
   radarManager.isAppRunning = true;
   radarManager.connect();
 };

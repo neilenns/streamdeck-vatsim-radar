@@ -1,4 +1,4 @@
-import streamDeck, {
+import {
   action,
   DidReceiveSettingsEvent,
   KeyDownEvent,
@@ -7,6 +7,9 @@ import streamDeck, {
 } from "@elgato/streamdeck";
 import { JsonValue } from "@elgato/utils";
 import radarManager from "@managers/radar";
+import mainLogger from "@utils/logger";
+
+const logger = mainLogger.child({ service: "activate-bookmark" });
 
 @action({ UUID: "com.neil-enns.vatsim-radar.activate-bookmark" })
 export class ActivateBookmark extends SingletonAction<ActivateBookmarkSettings> {
@@ -27,9 +30,7 @@ export class ActivateBookmark extends SingletonAction<ActivateBookmarkSettings> 
   override onDidReceiveSettings(
     ev: DidReceiveSettingsEvent<ActivateBookmarkSettings>,
   ): void {
-    streamDeck.logger.info(
-      `Received selected setting ${ev.payload.settings.bookmark}`,
-    );
+    logger.info(`Received selected setting ${ev.payload.settings.bookmark}`);
   }
 
   override async onKeyDown(
@@ -38,14 +39,12 @@ export class ActivateBookmark extends SingletonAction<ActivateBookmarkSettings> 
     const { settings } = ev.payload;
 
     if (!settings.bookmark) {
-      streamDeck.logger.warn(`No bookmark configured for action.`);
+      logger.warn(`No bookmark configured for action.`);
       ev.action.showAlert();
       return;
     }
 
-    streamDeck.logger.info(
-      `Activating bookmark: ${settings.bookmark ?? "None"}`,
-    );
+    logger.info(`Activating bookmark: ${settings.bookmark ?? "None"}`);
 
     radarManager.sendMessage({
       type: "activate-bookmark",

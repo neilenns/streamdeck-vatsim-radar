@@ -11,7 +11,12 @@
       "isBackground": true,
       "problemMatcher": "$rollup-ts-watch",
       "label": "npm: watch",
-      "detail": "rollup -c -w --watch.onEnd=\"streamdeck restart com.neil-enns.vatsim-radar\""
+      "detail": "rollup -c -w --watch.onEnd=\"streamdeck restart com.neil-enns.vatsim-radar\"",
+      "options": {
+        "env": {
+          "NODE_ENV": "development"
+        }
+      }
     }
   ]
 }

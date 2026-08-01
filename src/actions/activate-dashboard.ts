@@ -1,4 +1,4 @@
-import streamDeck, {
+import {
   action,
   DidReceiveSettingsEvent,
   KeyDownEvent,
@@ -7,6 +7,9 @@ import streamDeck, {
 } from "@elgato/streamdeck";
 import { JsonValue } from "@elgato/utils";
 import radarManager from "@managers/radar";
+import mainLogger from "@utils/logger";
+
+const logger = mainLogger.child({ service: "activate-dashboard" });
 
 @action({ UUID: "com.neil-enns.vatsim-radar.activate-dashboard" })
 export class ActivateDashboard extends SingletonAction<ActivateDashboardSettings> {
@@ -18,7 +21,7 @@ export class ActivateDashboard extends SingletonAction<ActivateDashboardSettings
       "event" in ev.payload &&
       ev.payload.event === "get-dashboards"
     ) {
-      console.log("Requesting dashboards");
+      logger.info("Requesting dashboards");
       radarManager.sendMessage({
         type: "get-dashboards",
       });
@@ -28,9 +31,7 @@ export class ActivateDashboard extends SingletonAction<ActivateDashboardSettings
   override onDidReceiveSettings(
     ev: DidReceiveSettingsEvent<ActivateDashboardSettings>,
   ): void {
-    streamDeck.logger.info(
-      `Received selected setting ${ev.payload.settings.dashboard}`,
-    );
+    logger.info(`Received selected setting ${ev.payload.settings.dashboard}`);
   }
 
   override async onKeyDown(
@@ -39,14 +40,12 @@ export class ActivateDashboard extends SingletonAction<ActivateDashboardSettings
     const { settings } = ev.payload;
 
     if (!settings.dashboard) {
-      streamDeck.logger.warn(`No dashboard configured for action.`);
+      logger.warn(`No dashboard configured for action.`);
       ev.action.showAlert();
       return;
     }
 
-    streamDeck.logger.info(
-      `Activating dashboard: ${settings.dashboard ?? "None"}`,
-    );
+    logger.info(`Activating dashboard: ${settings.dashboard ?? "None"}`);
 
     radarManager.sendMessage({
       type: "activate-dashboard",
