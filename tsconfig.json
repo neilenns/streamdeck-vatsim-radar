@@ -7,7 +7,7 @@
       "@interfaces/*": ["./src/interfaces/*"],
       "@managers/*": ["./src/managers/*"],
       "@root/*": ["./src/*"],
-      "@utils/*": ["./utils/*"]
+      "@utils/*": ["./src/utils/*"]
     },
     "customConditions": ["node"],
     "module": "ES2022",
