@@ -1,7 +1,7 @@
-# vATIS actions for Stream Deck <!-- omit from toc -->
+# VATSIM Radar actions for Stream Deck <!-- omit from toc -->
 
 > [!IMPORTANT]
-> This plugin requires the [VATSIM Radar desktop app (version TBD)](https://vatsim-radar.com/download) or later.
+> This plugin requires the [VATSIM Radar (next) desktop app](https://next.vatsim-radar.com/download).
 
 <!--
 [![get it on marketplace](docs/marketplace-light.svg "Get VATSIM Radar on Marketplace")](https://marketplace.elgato.com/product/vatis-878fcd1a-7e0a-4d6e-bd36-c70b075573ea)
