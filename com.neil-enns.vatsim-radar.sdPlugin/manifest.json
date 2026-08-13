@@ -8,6 +8,7 @@
       "UUID": "com.neil-enns.vatsim-radar.activate-bookmark",
       "Icon": "images/actions/activate-bookmark/icon",
       "Tooltip": "Activates a VATSIM Radar bookmark.",
+      "SupportURL": "https://projects.neilenns.com/docs/streamdeck-vatsim-radar/activate-bookmark/",
       "PropertyInspectorPath": "ui/activate-bookmark.html",
       "Controllers": ["Keypad"],
       "States": [
@@ -22,6 +23,7 @@
       "UUID": "com.neil-enns.vatsim-radar.activate-dashboard",
       "Icon": "images/actions/activate-dashboard/icon",
       "Tooltip": "Activates a VATSIM Radar dashboard.",
+      "SupportURL": "https://projects.neilenns.com/docs/streamdeck-vatsim-radar/activate-dashboard/",
       "PropertyInspectorPath": "ui/activate-dashboard.html",
       "Controllers": ["Keypad"],
       "States": [
