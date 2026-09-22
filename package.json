@@ -6,7 +6,7 @@
   },
   "type": "module",
   "devDependencies": {
-    "@elgato/cli": "^1.8.0",
+    "@elgato/cli": "^1.10.0",
     "@eslint/js": "^10.0.1",
     "@rollup/plugin-commonjs": "^29.0.2",
     "@rollup/plugin-json": "^6.1.0",
@@ -24,7 +24,7 @@
     "typescript-eslint": "^8.65.0"
   },
   "dependencies": {
-    "@elgato/streamdeck": "^2.0.0",
+    "@elgato/streamdeck": "^3.0.0",
     "dotenv": "^17.4.2",
     "streamdeck-transport": "^2.0.1",
     "winston": "^3.19.0"
